@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item1"
+        android:title="Update Cases"
+        android:icon="@drawable/ic_baseline_system_update_alt_24" />
+    <item
+        android:id="@+id/menu_item2"
+        android:title="About Us"
+        android:icon="@drawable/ic_baseline_apps_24" />
+    <item
+        android:id="@+id/menu_item3"
+        android:title="Contact"
+        android:icon="@drawable/ic_baseline_phone_24"/>
+    <item
+        android:id="@+id/menu_item4"
+        android:title="Help Center"
+        android:icon="@drawable/ic_baseline_help_center_24"/>
+    <item
+        android:id="@+id/menu_item5"
+        android:title="Quit"
+        android:icon="@drawable/ic_baseline_logout_24"/>
+</menu>

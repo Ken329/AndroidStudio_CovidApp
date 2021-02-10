@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Covid App</string>
+    <string-array name="country">
+        <item>Australia</item>
+        <item>United State</item>
+        <item>Cambodia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Korea</item>
+        <item>Malaysia</item>
+        <item>Thailand</item>
+        <item>Bangladesh</item>
+        <item>New Zealand</item>
+        <item>Pakistan</item>
+        <item>Singapore</item>
+        <item>Belgium</item>
+        <item>Hungary</item>
+    </string-array>
+</resources>
