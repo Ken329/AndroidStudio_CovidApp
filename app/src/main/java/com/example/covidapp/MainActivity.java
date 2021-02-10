@@ -1,6 +1,7 @@
 package com.example.covidapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Intent intent;
     DatabaseReference ref;
     String myCountry;
+    private AlertDialog dialog;
+    private  AlertDialog.Builder dialogBuilder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +71,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_item1:
-                        intent = new Intent(getApplicationContext(), MainUpdate.class);
-                        startActivity(intent);
+                        buildDialog();
                         return true;
                     case R.id.menu_item2:
                         Toast.makeText(MainActivity.this, "About Us", Toast.LENGTH_SHORT).show();
@@ -96,6 +99,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 showMore(myCountry);
+            }
+        });
+    }
+    public void buildDialog(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View view = getLayoutInflater().inflate(R.layout.update_popup, null);
+        TextView pass = (TextView) view.findViewById(R.id.popUpPassword);
+        TextView enter = (TextView) view.findViewById(R.id.popUpEnter);
+
+        dialogBuilder.setView(view);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String password = pass.getText().toString();
+                if(password.equals("Admin")){
+                    intent = new Intent(getApplicationContext(), MainUpdate.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(MainActivity.this, "Wrong password !!!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
             }
         });
     }
