@@ -7,17 +7,21 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     ImageButton sideMenu;
-    TextView cases, phone, sms, showMore, statistic;
+    TextView cases, phone, sms, showMore, statistic, prevent1, prevent2, prevent3, test, preventAll;
     ImageView flag;
     Spinner spinner;
     DrawerLayout drawerLayout;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Intent intent;
     DatabaseReference ref;
     String myCountry;
+    String phoneNumber = "6012-7033360";
     private AlertDialog dialog;
     private  AlertDialog.Builder dialogBuilder;
 
@@ -55,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         sms = findViewById(R.id.mainSms);
         showMore = findViewById(R.id.mainShowMore);
         statistic = findViewById(R.id.mainStatistic);
+        prevent1 = findViewById(R.id.mainPrevent1);
+        prevent2 = findViewById(R.id.mainPrevent2);
+        prevent3 = findViewById(R.id.mainPrevent3);
+        test = findViewById(R.id.mainTest);
+        preventAll = findViewById(R.id.mainPreventAll);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.country, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -89,6 +99,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return false;
             }
         });
+        phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:"+phoneNumber));
+                startActivity(intent);
+            }
+        });
+        sms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Function not available yet", Toast.LENGTH_SHORT).show();
+            }
+        });
         showMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +123,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 showMore(myCountry);
+            }
+        });
+        preventAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainPreventAll.class);
+                startActivity(intent);
+            }
+        });
+        prevent1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheet bottom = new bottomSheet("mask", MainActivity.this);
+                bottom.getBottomSheet();
+            }
+        });
+        prevent2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheet bottom = new bottomSheet("distance", MainActivity.this);
+                bottom.getBottomSheet();
+            }
+        });
+        prevent3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheet bottom = new bottomSheet("wash", MainActivity.this);
+                bottom.getBottomSheet();
+            }
+        });
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheet bottom = new bottomSheet("test", MainActivity.this);
+                bottom.getBottomSheet();
             }
         });
     }

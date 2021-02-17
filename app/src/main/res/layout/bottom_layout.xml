@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheetContainer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bottom_bar"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/bottomSheetImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        android:layout_gravity="center"
+        android:elevation="8dp"
+        app:srcCompat="@mipmap/mask_foreground" />
+    <TextView
+        android:id="@+id/bottomSheetTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/bottomSheetText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Washing hands with soap and water is the best way to get rid of germs in most situations. If soap and water are not readily available, you can use an alcohol-based hand sanitizer that contains at least 60% alcohol. You can tell if the sanitizer contains at least 60% alcohol by looking at the product label"
+        android:textSize="15dp"
+        android:justificationMode="inter_word"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        tools:ignore="RtlCompat" />
+</LinearLayout>
