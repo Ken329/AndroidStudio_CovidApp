@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -87,13 +91,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Toast.makeText(MainActivity.this, "About Us", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.menu_item3:
-                        Toast.makeText(MainActivity.this, "Contact", Toast.LENGTH_SHORT).show();
+                        bottomLay();
                         return true;
                     case R.id.menu_item4:
                         Toast.makeText(MainActivity.this, "Help Center", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.menu_item5:
-                        Toast.makeText(MainActivity.this, "Quit", Toast.LENGTH_SHORT).show();
+                        quit();
                         return true;
                 }
                 return false;
@@ -160,6 +164,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 bottom.getBottomSheet();
             }
         });
+    }
+    public void quit(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.exit_layout);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.button));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+
+        TextView yes = dialog.findViewById(R.id.exitYes);
+        TextView no = dialog.findViewById(R.id.exitNo);
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+    public void bottomLay(){
+        BottomSheetDialog bottom = new BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.contact_bottom_layout, (LinearLayout)findViewById(R.id.contactBottomContainer));
+        bottom.setContentView(view);
+        bottom.show();
     }
     public void buildDialog(){
         dialogBuilder = new AlertDialog.Builder(this);
